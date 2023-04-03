@@ -10,10 +10,11 @@ def filter_relative_time(data, start1=0, end1=1.75*60, start2=2.25*60, end2=4*60
     return pd.concat([period1, period2])
 
 stimuli_files = ['Ensure.csv', 'Saline.csv', 'IP Dex.csv', 'CCK.csv', 'WSS.csv', 'Oral Dex.csv', 'FACHOW.csv', 'FEDCHOW.csv', 'FAHF.csv', 'EX4.csv', 'LEP.csv']
-stimuli_data = [pd.read_csv(file) for file in stimuli_files]
+stimuli_data = [pd.read_csv(file, usecols=range(2, 22)) for file in stimuli_files]  # Only select columns 2-21
 filtered_data = [filter_relative_time(data) for data in stimuli_data]
 
 correlation_matrices = [data.corr() for data in filtered_data]
+
 
 # Function to draw a clustered heatmap for each stimulus
 def draw_clustered_heatmap(correlation_matrix, title):

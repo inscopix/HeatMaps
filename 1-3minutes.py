@@ -8,7 +8,7 @@ stimuli_files = ['Ensure.csv', 'Saline.csv', 'IP Dex.csv', 'CCK.csv', 'WSS.csv',
 stimuli_data = [pd.read_csv(file) for file in stimuli_files]
 
 
-def filter_relative_time(data, start1=0.25*60, end1=1.75*60, start2=2.25*60, end2=5*60):
+def filter_relative_time(data, start1=0, end1=1.75, start2=2.25, end2=5):
     relative_time = data[' Time'] - data[' Time'].iloc[0]
     period1 = data[(relative_time >= start1) & (relative_time <= end1)]
     period2 = data[(relative_time >= start2) & (relative_time <= end2)]
