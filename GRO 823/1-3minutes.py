@@ -21,7 +21,7 @@ filtered_data = [filter_relative_time(data) for data in stimuli_data]
 # Calculate the correlation matrices for each stimulus
 correlation_matrices = [data.corr() for data in filtered_data]
 
-# Set up the figure and axes for the grid of heatmaps
+# Set up the figure and axes for the grid of heatmapscd
 fig, axs = plt.subplots(nrows=3, ncols=4, figsize=(20, 10))
 
 # Create a list of axes for each heatmap
