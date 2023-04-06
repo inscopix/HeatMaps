@@ -35,7 +35,7 @@ import numpy as np
 df = pd.read_csv("CCK.csv", names=['col1', 'col2', 'col3'])
 
 # compute baseline fluorescence for each cell based on the first two minutes of the timeframe
-baseline = df[df["Time"] <= 120].groupby('cell').mean()
+baseline = df[df[" Time"] <= 120].groupby('cell').mean()
 
 # subtract the baseline fluorescence from the rest of the traces to get dF/F
 dff = df.set_index("cell") - baseline
