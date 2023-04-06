@@ -32,7 +32,7 @@ def plot_raster(ax, stimulus_data, stimulus_number):
     ax.set_ylabel('Neurons', color='white')
     ax.set_yticks(range(len(stimulus_data.columns[1:])))
     ax.set_yticklabels(stimulus_data.columns[1:], color='white')
-    ax.tick_params(axis='x', rotation=0, colors='white')g
+    ax.tick_params(axis='x', rotation=0, colors='white')
     
     # Set plot appearance parameters
     ax.spines[:].set_visible(False)
