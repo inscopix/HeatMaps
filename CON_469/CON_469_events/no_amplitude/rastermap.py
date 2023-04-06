@@ -1,11 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
-import os
-
-# Change the working directory to the folder containing the script
-script_folder = os.path.dirname(os.path.abspath(__file__))
-os.chdir(script_folder)
 
 # Set plot style parameters
 plt.rcParams['font.family'] = 'Helvetica'
@@ -13,7 +8,7 @@ plt.rcParams['font.size'] = 10  # Adjust the value for a smaller font size
 plt.rcParams['axes.labelsize'] = 10  # Adjust the value for the desired axes font size
 
 # Read the CSV files into a list of DataFrames
-stimuli_files = ['Ensure.csv', 'Saline.csv', 'IP Dex.csv', 'CCK.csv', 'WSS.csv', 'Oral Dex.csv', 'FACHOW.csv', 'FEDCHOW.csv', 'FAHF.csv', 'EX4.csv', 'LEP.csv']
+stimuli_files = ['Ensure.csv', 'CCK.csv', 'FACHOW.csv', 'FEDCHOW.csv', 'FAHF.csv']
 stimuli_data = [pd.read_csv(file) for file in stimuli_files]
 
 # Function to create a raster plot for each stimulus

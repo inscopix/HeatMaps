@@ -2,6 +2,11 @@ import pandas as pd
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
+import os
+
+# Change the working directory to the folder containing the script
+script_folder = os.path.dirname(os.path.abspath(__file__))
+os.chdir(script_folder)
 
 # Load the CSV files into a list of DataFrames
 stimuli_files = ['Ensure.csv', 'Saline.csv', 'IP Dex.csv', 'CCK.csv', 'WSS.csv', 'Oral Dex.csv', 'FACHOW.csv', 'FEDCHOW.csv', 'FAHF.csv', 'EX4.csv', 'LEP.csv']
@@ -39,6 +44,19 @@ for i in range(len(stimuli_files)):
     # Close the newly created figure by seaborn (we only need the heatmap)
     plt.close(cm.fig)
 
-fig.suptitle('Correlation Heatmaps for All Stimuli', fontsize=16)
+# fig.suptitle(f'Correlation Heatmaps for All Stimuli\nFolder: {script_folder}', fontsize=16, y=0.95)
+# # Include the folder path in the main title
+# ax.set_title(f'{stimuli_files[i][:-4]}\nFolder: {script_folder}', pad=15, fontsize=title_fontsize, multialignment='left')
+
+
+
+fig.suptitle('Correlation Heatmaps for All Stimuli', fontsize=16, y=0.95)
+# Create a subtitle with the folder path
+subtitle = fig.text(0.5, 0.02, f'Folder: {script_folder}', fontsize=4, ha='center')
+lowest_level_folder = os.path.basename(script_folder)
+subtitle = fig.text(0.5, 0.9, f'Folder: {lowest_level_folder}', fontsize=12, ha='center')
+
+# Adjust the space between subplots
+fig.subplots_adjust(left=0.1, right=0.9, top=0.9, bottom=0.1, wspace=0.4, hspace=0.4)
 
 plt.show()

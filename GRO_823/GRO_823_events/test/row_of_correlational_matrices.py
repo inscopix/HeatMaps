@@ -2,6 +2,11 @@ import pandas as pd
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
+import os
+
+# Change the working directory to the folder containing the script
+script_folder = os.path.dirname(os.path.abspath(__file__))
+os.chdir(script_folder)
 
 # Load the CSV files into a list of DataFrames
 stimuli_files = ['Ensure.csv', 'Saline.csv', 'IP Dex.csv', 'CCK.csv', 'WSS.csv', 'Oral Dex.csv', 'FACHOW.csv', 'FEDCHOW.csv', 'FAHF.csv', 'EX4.csv', 'LEP.csv']   # Add all your 11 CSV file names
