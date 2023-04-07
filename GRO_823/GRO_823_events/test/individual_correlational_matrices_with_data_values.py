@@ -29,4 +29,3 @@ def draw_heatmap(correlation_matrix, title):
 for i, matrix in enumerate(correlation_matrices, start=1):
     draw_heatmap(matrix, f'Stimulus {i} Correlation Matrix')
 
-plt.title(f'Files analyzed from folder: {args.folder_path}')
