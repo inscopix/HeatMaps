@@ -16,6 +16,11 @@ plt.rcParams['axes.labelsize'] = 10  # Adjust the value for the desired axes fon
 stimuli_files = ['Ensure.csv', 'Saline.csv', 'IP Dex.csv', 'CCK.csv', 'WSS.csv', 'Oral Dex.csv', 'FACHOW.csv', 'FEDCHOW.csv', 'FAHF.csv', 'EX4.csv', 'LEP.csv']
 stimuli_data = [pd.read_csv(file) for file in stimuli_files]
 
+# Remove rows and columns with all NaN values
+for i, data in enumerate(stimuli_data):
+    stimuli_data[i] = data.dropna(axis=0, how='all')
+    stimuli_data[i] = data.dropna(axis=1, how='all')
+
 # Function to create a raster plot for each stimulus
 def plot_raster(ax, stimulus_data, stimulus_number):
     # Generate colors for each neuron
@@ -50,7 +55,7 @@ def plot_raster(ax, stimulus_data, stimulus_number):
 # Create a raster plot for each stimulus
 fig, axs = plt.subplots(nrows=3, ncols=4, figsize=(10, 10), constrained_layout=True)
 ax_list = axs.ravel()
-fig.patch.set_facecolor('black')
+fig.patch.set_facecolor ('black')
 
 # Plot each stimulus and set the title
 for i, stimulus_data in enumerate(stimuli_data):
