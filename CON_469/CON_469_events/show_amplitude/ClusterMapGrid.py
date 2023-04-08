@@ -9,7 +9,7 @@ script_folder = os.path.dirname(os.path.abspath(__file__))
 os.chdir(script_folder)
 
 # Load the CSV files into a list of DataFrames
-stimuli_files = ['Ensure.csv', 'Saline.csv', 'IP Dex.csv', 'CCK.csv', 'Oral Dex.csv', 'FACHOW.csv', 'FEDCHOW.csv', 'FAHF.csv', 'EX4.csv', 'LEP.csv']
+stimuli_files = ['Ensure.csv', 'CCK.csv', 'FACHOW.csv', 'FEDCHOW.csv', 'FAHF.csv']
 stimuli_data = [pd.read_csv(file) for file in stimuli_files]
 
 # No filtering based on time ranges is applied here

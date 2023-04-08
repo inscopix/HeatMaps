@@ -1,6 +1,11 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+import os
+
+# Change the working directory to the folder containing the script
+script_folder = os.path.dirname(os.path.abspath(__file__))
+os.chdir(script_folder)
 
 # Set plot style parameters
 plt.rcParams['font.family'] = 'Helvetica'

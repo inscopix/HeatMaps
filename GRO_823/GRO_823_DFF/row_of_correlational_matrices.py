@@ -22,7 +22,7 @@ combined_matrix = pd.concat(correlation_matrices, axis=1)
 fig, ax = plt.subplots(figsize=(20, 10))
 
 # Draw the heatmap with no cell labels and a centered colorbar
-sns.heatmap(combined_matrix, cmap="magma", vmin=-1, vmax=1, ax=ax, cbar_kws={'orientation': 'horizontal', 'label': 'Correlation Coefficient'})
+sns.heatmap(combined_matrix, cmap="twilight_shifted", vmin=-1, vmax=1, ax=ax, cbar_kws={'orientation': 'horizontal', 'label': 'Correlation Coefficient'})
 ax.set_title('Correlation Heatmap for All Stimuli')
 ax.tick_params(bottom=False, left=False)
 

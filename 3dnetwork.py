@@ -2,7 +2,7 @@ import pandas as pd
 import networkx as nx
 import plotly.graph_objects as go
 
-stimuli_files = ['CCK.csv']  # Add all your 11 CSV file names
+stimuli_files = ['event_aligned_activity.TRACES.csv']  # Add all your 11 CSV file names
 stimuli_data = [pd.read_csv(file) for file in stimuli_files]
 
 correlation_matrices = [data.corr() for data in stimuli_data]
