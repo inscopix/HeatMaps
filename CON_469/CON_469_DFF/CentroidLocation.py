@@ -1,5 +1,10 @@
+import os
+
 import pandas as pd
 import matplotlib.pyplot as plt
+
+script_folder = os.path.dirname(os.path.abspath(__file__))
+os.chdir(script_folder)
 
 # Load the CSV data
 data = pd.read_csv('cck_fachow_fedchow_ss_fahf-props.csv')
