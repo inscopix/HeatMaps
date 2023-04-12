@@ -56,8 +56,8 @@ coordinates = pd.read_csv('cck_fachow_fedchow_ss_fahf-props.csv', usecols=['Cent
 # Periods and thresholds
 period1 = slice(0, 1200)
 period2 = slice(1400, 4000)
-corr_threshold = 0.6
-activity_threshold = 0.2
+corr_threshold = 0.5
+activity_threshold = 0.9
 
 # Create and visualize the graph
 G, node_colors = create_graph(coordinates, neuron_activity, corr_threshold, period1, period2, activity_threshold)
