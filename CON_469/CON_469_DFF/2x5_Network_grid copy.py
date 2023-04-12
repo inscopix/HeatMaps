@@ -14,24 +14,27 @@ coordinates = pd.read_csv('cck_fachow_fedchow_ss_fahf-props.csv', usecols=['Cent
 
 # Periods and thresholds
 period1 = slice(0, 1200)
-period2 = slice(1400, 4000)
-activity_threshold = 0.4
+period2 = slice(1400, 8000)
+activity_threshold = 0.9
 
 def calculate_correlation(a, b):
     return pearsonr(a, b)[0]
 
-def calculate_activity_differences(neuron_activity, period1, period2):
+def calculate_activity_differences(neuron_activity, period1, period2, activity_threshold):
     activity_differences = []
     for activity in neuron_activity.T:
-        diff = np.mean(activity[period2]) - np.mean(activity[period1])
+        activity_filtered = activity[np.abs(activity) > activity_threshold]
+        diff = np.mean(activity_filtered[period2]) - np.mean(activity_filtered[period1])
         activity_differences.append(diff)
     return activity_differences
 
-activity_differences = calculate_activity_differences(neuron_activity, period1, period2)
+
+activity_differences = calculate_activity_differences(neuron_activity, period1, period2, activity_threshold)
+
 
 import matplotlib.colors as mcolors
 
-cmap = plt.get_cmap('seismic')
+cmap = plt.get_cmap('coolwarm')
 node_norm = mcolors.Normalize(vmin=min(activity_differences), vmax=max(activity_differences))
 node_colors = [cmap(node_norm(diff)) for diff in activity_differences]
 
@@ -48,7 +51,19 @@ def create_graph(coordinates, neuron_activity, corr_threshold, period1, period2,
             if correlation > corr_threshold:
                 G.add_edge(i, j, weight=correlation)
 
+    # Calculate node colors based on activity_threshold
+    activity_differences = calculate_activity_differences(neuron_activity, period1, period2, activity_threshold)
+    node_colors = []
+    for diff in activity_differences:
+        if diff > activity_threshold:
+            node_colors.append(cmap(1.0))
+        elif diff < -activity_threshold:
+            node_colors.append(cmap(0.0))
+        else:
+            node_colors.append(cmap(0.5))
+
     return G, node_colors
+
 
 def visualize_graph(ax, G, node_colors):
     pos = nx.get_node_attributes(G, 'pos')
@@ -58,22 +73,28 @@ def visualize_graph(ax, G, node_colors):
 
     nx.draw(G, pos, node_color=node_colors, with_labels=True, font_color='white',
             edge_color=cmap(edge_norm(edge_colors)), edge_cmap=cmap, edge_vmin=-1, edge_vmax=1, ax=ax)
+    ax.invert_yaxis()  # Invert the y-axis
     ax.set_facecolor('black')
 
-# Create two subplots
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 7))
+# Create a 5x5 grid of subplots
+n_rows = 5
+n_cols = 5
+fig, axes = plt.subplots(n_rows, n_cols, figsize=(25, 25))
+fig.subplots_adjust(hspace=0.5, wspace=0.5)
 
-# Create and visualize the graphs with different correlation thresholds
-corr_threshold_1 = 0.5
-G1, node_colors1 = create_graph(coordinates, neuron_activity, corr_threshold_1, period1, period2, activity_threshold)
-visualize_graph(ax1, G1, node_colors1)
-ax1.set_title(f'Correlation Threshold: {corr_threshold_1}')
-# plt.gca().invert_yaxis()
+# Define the range of corr_threshold and activity_threshold values
+corr_thresholds = np.linspace(0.1, 1, n_rows)
+activity_thresholds = np.linspace(0.1, 1, n_cols)
 
-corr_threshold_2 = 0.8
-G2, node_colors2 = create_graph(coordinates, neuron_activity, corr_threshold_2, period1, period2, activity_threshold)
-visualize_graph(ax2, G2, node_colors2)
-ax2.set_title(f'Correlation Threshold: {corr_threshold_2}')
-# plt.gca().invert_yaxis()
+# Loop through the subplots and corr_threshold values
+for i, corr_threshold in enumerate(corr_thresholds):
+    for j, activity_threshold in enumerate(activity_thresholds):
+        # Create and visualize the graph with the current corr_threshold and activity_threshold values
+        G, node_colors = create_graph(coordinates, neuron_activity, corr_threshold, period1, period2, activity_threshold)
+        visualize_graph(axes[i, j], G, node_colors)
+        axes[i, j].set_title(f'Corr. Thresh.: {corr_threshold:.2f}, Act. Thresh.: {activity_threshold:.2f}')
+
+# Display the final figure
 plt.show()
+
 

@@ -15,7 +15,7 @@ def calculate_correlation(a, b):
 def compare_activity(neuron_data, period1, period2, threshold):
     colors = []
     for activity in neuron_data.T:
-        diff = np.mean(activity[period2]) - np.mean(activity[period1])
+        diff = np.mean(activity[period2]) / np.mean(activity[period1])
         if diff > threshold:
             colors.append('red')
         elif diff < -threshold:
@@ -55,9 +55,9 @@ coordinates = pd.read_csv('cck_fachow_fedchow_ss_fahf-props.csv', usecols=['Cent
 
 # Periods and thresholds
 period1 = slice(0, 1200)
-period2 = slice(1400, 4000)
-corr_threshold = 0.5
-activity_threshold = 0.9
+period2 = slice(1400, 2000)
+corr_threshold = 0.4
+activity_threshold = 0.4
 
 # Create and visualize the graph
 G, node_colors = create_graph(coordinates, neuron_activity, corr_threshold, period1, period2, activity_threshold)
