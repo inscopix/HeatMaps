@@ -15,7 +15,7 @@ coordinates = pd.read_csv('cck_fachow_fedchow_ss_fahf-props.csv', usecols=['Cent
 # Periods and thresholds
 period1 = slice(0, 1200)
 period2 = slice(1400, 4000)
-activity_threshold = 0.4
+activity_threshold = 0.7
 
 def calculate_correlation(a, b):
     return pearsonr(a, b)[0]
