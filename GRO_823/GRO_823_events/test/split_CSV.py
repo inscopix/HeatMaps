@@ -1,6 +1,7 @@
 import pandas as pd
 
-data = pd.read_csv('GRO_823.csv')
+data = pd.read_csv("GRO_823.csv")
+
 
 def split_dataframe_on_zeros(df):
     zero_rows = df[df.iloc[:, 1:21].eq(0).all(axis=1)].index.tolist()
@@ -13,9 +14,8 @@ def split_dataframe_on_zeros(df):
 
     return dataframes
 
+
 stimuli_data = split_dataframe_on_zeros(data)
 
 for i, stimulus_data in enumerate(stimuli_data, start=1):
-    stimulus_data.to_csv(f'stimulus{i}.csv', index=False)
-
-
+    stimulus_data.to_csv(f"stimulus{i}.csv", index=False)

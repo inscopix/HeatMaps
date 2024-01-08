@@ -5,7 +5,13 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Load the CSV files into a list of DataFrames
-stimuli_files = ['Ensure.csv', 'CCK.csv', 'FACHOW.csv', 'FEDCHOW.csv', 'FAHF.csv']   # Add all your 11 CSV file names
+stimuli_files = [
+    "Ensure.csv",
+    "CCK.csv",
+    "FACHOW.csv",
+    "FEDCHOW.csv",
+    "FAHF.csv",
+]  # Add all your 11 CSV file names
 stimuli_data = [pd.read_csv(file) for file in stimuli_files]
 
 # Calculate the correlation matrices for each stimulus
@@ -18,8 +24,15 @@ combined_matrix = pd.concat(correlation_matrices, axis=1)
 fig, ax = plt.subplots(figsize=(20, 10))
 
 # Draw the heatmap with no cell labels and a centered colorbar
-sns.heatmap(combined_matrix, cmap="magma", vmin=-1, vmax=1, ax=ax, cbar_kws={'orientation': 'horizontal', 'label': 'Correlation Coefficient'})
-ax.set_title('Correlation Heatmap for All Stimuli')
+sns.heatmap(
+    combined_matrix,
+    cmap="magma",
+    vmin=-1,
+    vmax=1,
+    ax=ax,
+    cbar_kws={"orientation": "horizontal", "label": "Correlation Coefficient"},
+)
+ax.set_title("Correlation Heatmap for All Stimuli")
 ax.tick_params(bottom=False, left=False)
 
 plt.show()
