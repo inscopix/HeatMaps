@@ -29,7 +29,7 @@ def draw_clustered_heatmap(correlation_matrix):
     return g
 
 
-def clustermapgrid(stimuli_files):
+def cluster_map_grid(stimuli_files):
     stimuli_data = [pd.read_csv(file) for file in stimuli_files]
     filtered_data = [filter_relative_time(data) for data in stimuli_data]
 

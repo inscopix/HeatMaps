@@ -1,11 +1,6 @@
-import pandas as pd
 import networkx as nx
+import pandas as pd
 import plotly.graph_objects as go
-
-stimuli_files = ["event_aligned_activity.TRACES.csv"]  # Add all your 11 CSV file names
-stimuli_data = [pd.read_csv(file) for file in stimuli_files]
-
-correlation_matrices = [data.corr() for data in stimuli_data]
 
 
 def build_graph(correlation_matrix, threshold=0.5):
@@ -17,11 +12,6 @@ def build_graph(correlation_matrix, threshold=0.5):
                 G.add_edge(i, j, weight=correlation_matrix.iloc[i, j])
 
     return G
-
-
-stimuli_graphs = [
-    build_graph(correlation_matrix) for correlation_matrix in correlation_matrices
-]
 
 
 def draw_3d_graph(G, title):
@@ -69,7 +59,17 @@ def draw_3d_graph(G, title):
 
     fig = go.Figure(data=[edge_trace, node_trace], layout=layout)
     fig.show()
+    fig.savefig(f"{title}.png")
 
 
-for i, (graph, file) in enumerate(zip(stimuli_graphs, stimuli_files), start=1):
-    draw_3d_graph(graph, f"{file} Network Graph")
+def network(stimuli_files):
+    stimuli_data = [pd.read_csv(file) for file in stimuli_files]
+
+    correlation_matrices = [data.corr() for data in stimuli_data]
+    stimuli_graphs = [
+        build_graph(correlation_matrix) for correlation_matrix in correlation_matrices
+    ]
+
+    for i, (graph, file) in enumerate(zip(stimuli_graphs, stimuli_files), start=1):
+        draw_3d_graph(graph, f"{file} Network Graph")
+        draw_3d_graph(graph, f"{file} Network Graph")
