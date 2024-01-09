@@ -1,0 +1,7 @@
+README.md
+setup.py
+HeatMaps.egg-info/PKG-INFO
+HeatMaps.egg-info/SOURCES.txt
+HeatMaps.egg-info/dependency_links.txt
+HeatMaps.egg-info/requires.txt
+HeatMaps.egg-info/top_level.txt
