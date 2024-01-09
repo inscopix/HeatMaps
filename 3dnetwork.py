@@ -59,7 +59,8 @@ def draw_3d_graph(G, title):
 
     fig = go.Figure(data=[edge_trace, node_trace], layout=layout)
     fig.show()
-    fig.savefig(f"{title}.png")
+    # save the figure
+    fig.write_image(f"{title}.png")
 
 
 def network(stimuli_files):
@@ -71,5 +72,4 @@ def network(stimuli_files):
     ]
 
     for i, (graph, file) in enumerate(zip(stimuli_graphs, stimuli_files), start=1):
-        draw_3d_graph(graph, f"{file} Network Graph")
         draw_3d_graph(graph, f"{file} Network Graph")

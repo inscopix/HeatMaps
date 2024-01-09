@@ -1,8 +1,6 @@
 import pandas as pd
-import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
-from matplotlib import font_manager
 
 # Load the CSV files into a list of DataFrames
 stimuli_files = [

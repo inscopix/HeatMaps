@@ -9,11 +9,12 @@ setup(
     description="Description of my package",
     packages=find_packages(),
     install_requires=[
-        pandas,
-        numpy,
-        seaborn,
-        matplotlib,
-        networkx,
-        plotly,
+        "pandas >= 1.3.3",
+        "numpy >= 1.21.2",
+        "seaborn >= 0.11.2",
+        "matplotlib >= 3.4.3",
+        "networkx >= 2.6.3",
+        "plotly >= 5.3.1",
+        "scipy >= 1.7.1"
     ],
 )

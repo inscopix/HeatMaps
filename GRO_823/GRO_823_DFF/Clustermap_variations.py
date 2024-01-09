@@ -1,11 +1,8 @@
 import pandas as pd
-import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 from scipy.cluster.hierarchy import linkage
-from sklearn.cluster import AgglomerativeClustering
 from sklearn.preprocessing import StandardScaler
-from sklearn.datasets import make_blobs
 import os
 
 # Change the working directory to the folder containing the script

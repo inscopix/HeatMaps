@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 from sklearn.cluster import (
@@ -11,7 +10,6 @@ from sklearn.cluster import (
     OPTICS,
 )
 from sklearn.mixture import GaussianMixture
-from sklearn import metrics
 import matplotlib
 
 matplotlib.use("TkAgg")
